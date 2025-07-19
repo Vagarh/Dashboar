@@ -44,23 +44,23 @@ export default function InvoicesPage() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="flex flex-col gap-1">
-          <CardTitle>Invoices</CardTitle>
-          <p className="text-sm text-muted-foreground">Manage and track all your customer invoices.</p>
+          <CardTitle>Reports</CardTitle>
+          <p className="text-sm text-muted-foreground">View and export patient health reports.</p>
         </div>
         <Button>
           <PlusCircle className="mr-2 h-4 w-4" />
-          Create Invoice
+          Generate Report
         </Button>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Invoice</TableHead>
-              <TableHead>Customer</TableHead>
+              <TableHead>Report ID</TableHead>
+              <TableHead>Patient</TableHead>
               <TableHead className="text-right">Amount</TableHead>
               <TableHead className="text-center">Status</TableHead>
-              <TableHead>Due Date</TableHead>
+              <TableHead>Date Generated</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -69,13 +69,13 @@ export default function InvoicesPage() {
           <TableBody>
             {invoices.map((invoice) => (
               <TableRow key={invoice.id}>
-                <TableCell className="font-medium">{invoice.invoiceNumber}</TableCell>
+                <TableCell className="font-medium">{invoice.invoiceNumber.replace('INV', 'REP')}</TableCell>
                 <TableCell>{invoice.customer.name}</TableCell>
                 <TableCell className="text-right">${invoice.amount.toLocaleString()}</TableCell>
                 <TableCell className="text-center">
                   <Badge variant={getStatusVariant(invoice.status)}>{invoice.status}</Badge>
                 </TableCell>
-                <TableCell>{invoice.dueDate}</TableCell>
+                <TableCell>{invoice.date}</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -89,7 +89,7 @@ export default function InvoicesPage() {
                         <FileText className="mr-2 h-4 w-4" />
                         View Details
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
+                      <DropdownMenuItem>Download</DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
                     </DropdownMenuContent>

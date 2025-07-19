@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { DollarSign, CreditCard, Activity } from 'lucide-react';
+import { HeartPulse, Flame, Footprints } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -18,121 +18,121 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from '@/components/ui/chart';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import type { Transaction } from '@/lib/types';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import type { Activity } from '@/lib/types';
 
-const revenueData = [
-  { month: 'Jan', revenue: 12000, expenses: 8000 },
-  { month: 'Feb', revenue: 14000, expenses: 9000 },
-  { month: 'Mar', revenue: 16000, expenses: 9500 },
-  { month: 'Apr', revenue: 15000, expenses: 10000 },
-  { month: 'May', revenue: 18000, expenses: 11000 },
-  { month: 'Jun', revenue: 20000, expenses: 12000 },
+const healthData = [
+  { day: 'Mon', steps: 4200, calories: 300 },
+  { day: 'Tue', steps: 5300, calories: 350 },
+  { day: 'Wed', steps: 3800, calories: 280 },
+  { day: 'Thu', steps: 7800, calories: 500 },
+  { day: 'Fri', steps: 6100, calories: 420 },
+  { day: 'Sat', steps: 10500, calories: 750 },
+  { day: 'Sun', steps: 8200, calories: 550 },
 ];
 
 const chartConfig = {
-  revenue: { label: 'Revenue', color: 'hsl(var(--primary))' },
-  expenses: { label: 'Expenses', color: 'hsl(var(--destructive))' },
+  steps: { label: 'Steps', color: 'hsl(var(--primary))' },
+  calories: { label: 'Calories', color: 'hsl(var(--accent))' },
 };
 
-const recentTransactions: Transaction[] = [
-  { id: '1', description: 'Web Design Project', amount: 5000, date: '2024-06-23', type: 'Revenue' },
-  { id: '2', description: 'Office Supplies', amount: -250, date: '2024-06-22', type: 'Expense' },
-  { id: '3', description: 'SaaS Subscription', amount: -100, date: '2024-06-21', type: 'Expense' },
-  { id: '4', description: 'Consulting Gig', amount: 2500, date: '2024-06-20', type: 'Revenue' },
-  { id: '5', description: 'Client Lunch', amount: -80, date: '2024-06-19', type: 'Expense' },
+const recentActivities: Activity[] = [
+  { id: '1', type: 'Workout', description: 'Morning Run', value: '5 km', date: '2024-07-23' },
+  { id: '2', type: 'Vitals', description: 'Blood Pressure', value: '120/80 mmHg', date: '2024-07-23' },
+  { id: '3', type: 'Meditation', description: '10 min Mindfulness', value: '10 min', date: '2024-07-22' },
+  { id: '4', type: 'Workout', description: 'Gym Session', value: '1.5 hours', date: '2024-07-22' },
+  { id: '5', type: 'Meal', description: 'Healthy Lunch', value: '450 kcal', date: '2024-07-21' },
 ];
 
 export default function DashboardPage() {
-  const totalRevenue = recentTransactions.filter(t => t.type === 'Revenue').reduce((acc, t) => acc + t.amount, 0);
-  const totalExpenses = recentTransactions.filter(t => t.type === 'Expense').reduce((acc, t) => acc + t.amount, 0);
-  const profit = totalRevenue + totalExpenses;
+  const avgHeartRate = 72;
+  const caloriesBurned = 2345;
+  const activeHours = 2.5;
 
   return (
     <div className="flex flex-col gap-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Avg. Heart Rate</CardTitle>
+            <HeartPulse className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${totalRevenue.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+            <div className="text-2xl font-bold">{avgHeartRate} <span className="text-sm font-normal text-muted-foreground">bpm</span></div>
+            <p className="text-xs text-muted-foreground">Resting heart rate</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Expenses</CardTitle>
-            <CreditCard className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Calories Burned</CardTitle>
+            <Flame className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${(totalExpenses * -1).toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+10.5% from last month</p>
+            <div className="text-2xl font-bold">{caloriesBurned.toLocaleString()}</div>
+            <p className="text-xs text-muted-foreground">+15% from yesterday</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Profit</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Active Hours</CardTitle>
+            <Footprints className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-accent">${profit.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+5.2% from last month</p>
+            <div className="text-2xl font-bold">{activeHours}h</div>
+            <p className="text-xs text-muted-foreground">Goal: 3h</p>
           </CardContent>
         </Card>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Overview</CardTitle>
-          <CardDescription>A summary of revenue and expenses for the last 6 months.</CardDescription>
+          <CardTitle>Weekly Activity</CardTitle>
+          <CardDescription>Your steps and calories burned over the last week.</CardDescription>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig} className="h-[300px] w-full">
-            <BarChart data={revenueData} margin={{ top: 20, right: 20, bottom: 5, left: 0 }}>
+            <LineChart data={healthData} margin={{ top: 20, right: 20, bottom: 5, left: 0 }}>
               <CartesianGrid vertical={false} />
-              <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
-              <YAxis tickLine={false} axisLine={false} tickFormatter={(value) => `$${Number(value) / 1000}k`} />
+              <XAxis dataKey="day" tickLine={false} tickMargin={10} axisLine={false} />
+              <YAxis yAxisId="left" tickLine={false} axisLine={false} stroke="var(--color-steps)" />
+              <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} stroke="var(--color-calories)" />
               <Tooltip
-                cursor={false}
+                cursor={true}
                 content={<ChartTooltipContent indicator="dot" />}
               />
               <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey="revenue" fill="var(--color-revenue)" radius={4} />
-              <Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
-            </BarChart>
+              <Line yAxisId="left" type="monotone" dataKey="steps" stroke="var(--color-steps)" strokeWidth={2} dot={false} />
+              <Line yAxisId="right" type="monotone" dataKey="calories" stroke="var(--color-calories)" strokeWidth={2} dot={false} />
+            </LineChart>
           </ChartContainer>
         </CardContent>
       </Card>
       
       <Card>
         <CardHeader>
-          <CardTitle>Recent Transactions</CardTitle>
+          <CardTitle>Recent Activities</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Description</TableHead>
                 <TableHead>Type</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead>Value</TableHead>
                 <TableHead>Date</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {recentTransactions.map((transaction) => (
-                <TableRow key={transaction.id}>
-                  <TableCell className="font-medium">{transaction.description}</TableCell>
-                  <TableCell>
-                    <Badge variant={transaction.type === 'Revenue' ? 'default' : 'secondary'} className={transaction.type === 'Revenue' ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800' : ''}>
-                      {transaction.type}
+              {recentActivities.map((activity) => (
+                <TableRow key={activity.id}>
+                   <TableCell>
+                    <Badge variant={activity.type === 'Workout' ? 'default' : 'secondary'}>
+                      {activity.type}
                     </Badge>
                   </TableCell>
-                  <TableCell className={`text-right font-semibold ${transaction.type === 'Revenue' ? 'text-accent' : 'text-destructive'}`}>
-                    {transaction.amount < 0 ? '-' : ''}${Math.abs(transaction.amount).toLocaleString()}
-                  </TableCell>
-                  <TableCell>{transaction.date}</TableCell>
+                  <TableCell className="font-medium">{activity.description}</TableCell>
+                  <TableCell>{activity.value}</TableCell>
+                  <TableCell>{activity.date}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

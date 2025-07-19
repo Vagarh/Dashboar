@@ -35,3 +35,11 @@ export interface Transaction {
   date: string;
   type: 'Revenue' | 'Expense';
 }
+
+export interface Activity {
+  id: string;
+  type: 'Workout' | 'Vitals' | 'Meditation' | 'Meal';
+  description: string;
+  value: string;
+  date: string;
+}

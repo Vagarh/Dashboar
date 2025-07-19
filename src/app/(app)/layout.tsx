@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { BizSightLogo } from '@/components/icons';
+import { HealthTrackLogo } from '@/components/icons';
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -31,8 +31,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   const menuItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/calendar', label: 'Calendar', icon: Calendar },
-    { href: '/invoices', label: 'Invoices', icon: FileText },
-    { href: '/contacts', label: 'Contacts', icon: Users },
+    { href: '/invoices', label: 'Reports', icon: FileText },
+    { href: '/contacts', label: 'Patients', icon: Users },
   ];
 
   return (
@@ -41,8 +41,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         <Sidebar>
           <SidebarHeader>
             <div className="flex items-center gap-2 p-2">
-              <BizSightLogo className="h-8 w-8 text-primary" />
-              <span className="text-xl font-semibold font-headline">BizSight</span>
+              <HealthTrackLogo className="h-8 w-8 text-primary" />
+              <span className="text-xl font-semibold font-headline">HealthTrack</span>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -78,8 +78,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
                     <AvatarFallback>U</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col truncate">
-                    <span className="font-semibold truncate">User Name</span>
-                    <span className="text-xs text-muted-foreground truncate">user@example.com</span>
+                    <span className="font-semibold truncate">Dr. Smith</span>
+                    <span className="text-xs text-muted-foreground truncate">dr.smith@example.com</span>
                   </div>
                 </div>
               </SidebarMenuItem>

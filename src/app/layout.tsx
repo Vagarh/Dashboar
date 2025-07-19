@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'BizSight',
-  description: 'A basic ERP for small businesses.',
+  title: 'HealthTrack',
+  description: 'A dashboard for health tracking.',
 };
 
 export default function RootLayout({

@@ -30,12 +30,12 @@ export default function ContactsPage() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="flex flex-col gap-1">
-          <CardTitle>Contacts</CardTitle>
-          <p className="text-sm text-muted-foreground">Manage your customer contacts.</p>
+          <CardTitle>Patients</CardTitle>
+          <p className="text-sm text-muted-foreground">Manage your patient records.</p>
         </div>
         <Button>
           <UserPlus className="mr-2 h-4 w-4" />
-          Add Contact
+          Add Patient
         </Button>
       </CardHeader>
       <CardContent>
@@ -43,7 +43,7 @@ export default function ContactsPage() {
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
-              <TableHead>Company</TableHead>
+              <TableHead>Last Visit</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Phone</TableHead>
               <TableHead>
@@ -63,7 +63,7 @@ export default function ContactsPage() {
                     <span>{contact.name}</span>
                   </div>
                 </TableCell>
-                <TableCell>{contact.company}</TableCell>
+                <TableCell>2024-07-15</TableCell>
                 <TableCell>{contact.email}</TableCell>
                 <TableCell>{contact.phone}</TableCell>
                 <TableCell>
@@ -76,7 +76,7 @@ export default function ContactsPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Send Email</DropdownMenuItem>
+                      <DropdownMenuItem>Send Message</DropdownMenuItem>
                       <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
