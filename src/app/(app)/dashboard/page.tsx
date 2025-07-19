@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { DollarSign, CreditCard, Activity } from 'lucide-react';
 import {
@@ -75,7 +77,7 @@ export default function DashboardPage() {
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-500">${profit.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-accent">${profit.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+5.2% from last month</p>
           </CardContent>
         </Card>
@@ -123,11 +125,11 @@ export default function DashboardPage() {
                 <TableRow key={transaction.id}>
                   <TableCell className="font-medium">{transaction.description}</TableCell>
                   <TableCell>
-                    <Badge variant={transaction.type === 'Revenue' ? 'default' : 'secondary'} className={transaction.type === 'Revenue' ? 'bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800' : ''}>
+                    <Badge variant={transaction.type === 'Revenue' ? 'default' : 'secondary'} className={transaction.type === 'Revenue' ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800' : ''}>
                       {transaction.type}
                     </Badge>
                   </TableCell>
-                  <TableCell className={`text-right font-semibold ${transaction.type === 'Revenue' ? 'text-emerald-600' : 'text-destructive'}`}>
+                  <TableCell className={`text-right font-semibold ${transaction.type === 'Revenue' ? 'text-accent' : 'text-destructive'}`}>
                     {transaction.amount < 0 ? '-' : ''}${Math.abs(transaction.amount).toLocaleString()}
                   </TableCell>
                   <TableCell>{transaction.date}</TableCell>
